@@ -5,6 +5,18 @@ package com.ole.core.interfaces;
  */
 public class TableImpl implements ITable {
 
+	private Object[] ids;
+	private Object[] columns;
+	private String name;
+
+	/**
+	 * init
+	 * 解析此table class
+	 */
+	private void init(){
+
+	}
+
 	@Override
 	public int save() {
 		return 0;
@@ -23,5 +35,30 @@ public class TableImpl implements ITable {
 	@Override
 	public ITable findById() {
 		return null;
+	}
+
+
+	public Object[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Object[] ids) {
+		this.ids = ids;
+	}
+
+	public Object[] getColumns() {
+		return columns;
+	}
+
+	public void setColumns(Object[] columns) {
+		this.columns = columns;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
