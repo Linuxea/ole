@@ -3,12 +3,14 @@ package com.ole.core;
 import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
 import com.ole.core.annotation.Table;
+import com.ole.core.interfaces.TableImpl;
+
 
 /**
  * Created by Linuxea on 2017/8/21.
  */
 @Table(name="tableDemo")
-public class Student {
+public class Student extends TableImpl {
 
 	@Id
 	private int id;
