@@ -1,6 +1,8 @@
 package com.ole.core.interfaces;
 
 import static com.google.common.base.Preconditions.*;
+
+import com.google.common.collect.Maps;
 import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
 import com.ole.core.annotation.Table;
@@ -25,8 +27,10 @@ public class TableImpl implements ITable {
 	private void init(){
 		Table table = this.getClass().getAnnotation(Table.class);
 		checkNotNull(table, "this class isn't mapping to a table");
+		idMap = Maps.newHashMap();
+		columnsMap = Maps.newHashMap();
 		this.name = table.name();
-		Field[] fields = this.getClass().getFields();
+		Field[] fields = this.getClass().getDeclaredFields();
 		for(Field field: fields){
 			field.setAccessible(true);
 			Column column = field.getAnnotation(Column.class);
@@ -49,23 +53,35 @@ public class TableImpl implements ITable {
 		return idMap.keySet();
 	}
 
+	public Set<String> getColumnsName(){
+		return columnsMap.keySet();
+	}
+
+	public TableImpl() {
+		this.init();
+	}
+
 	@Override
 	public int save() {
+		System.out.println("save");
 		return 0;
 	}
 
 	@Override
 	public int update() {
+		System.out.println("update");
 		return 0;
 	}
 
 	@Override
 	public int delete() {
+		System.out.println("delete");
 		return 0;
 	}
 
 	@Override
 	public ITable findById() {
+		System.out.println("findById");
 		return null;
 	}
 

@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE.METHOD})
+@Target({ElementType.FIELD, ElementType.METHOD})
 public @interface Column {
 	String name();
 	Class type();

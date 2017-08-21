@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE.METHOD})
+@Target({ElementType.FIELD, ElementType.METHOD})
 public @interface Id {
 	String name() default "id";
 	Class type() default Integer.class;
