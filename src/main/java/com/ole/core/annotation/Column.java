@@ -1,6 +1,5 @@
 package com.ole.core.annotation;
 
-
 import java.lang.annotation.*;
 
 /**
