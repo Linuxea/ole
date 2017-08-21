@@ -4,6 +4,7 @@ import com.ole.core.interfaces.ITable;
 
 /**
  * Created by Linuxea on 2017/8/21.
+ * 普通工具类
  */
 public class Db {
 

@@ -18,6 +18,8 @@ public class Student extends TableImpl {
 	private String name;
 	@Column(name="age",type = Integer.class)
 	private Integer age;
+	@Column(name = "sex", type = Byte.class)
+	private byte sex;
 
 	public int getId() {
 		return id;
@@ -41,6 +43,14 @@ public class Student extends TableImpl {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public byte getSex() {
+		return sex;
+	}
+
+	public void setSex(byte sex) {
+		this.sex = sex;
 	}
 
 	@Override
