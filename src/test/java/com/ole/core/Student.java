@@ -9,7 +9,7 @@ import com.ole.core.interfaces.TableImpl;
 /**
  * Created by Linuxea on 2017/8/21.
  */
-@Table(name="tableDemo")
+@Table(name="stu")
 public class Student extends TableImpl {
 
 	@Id

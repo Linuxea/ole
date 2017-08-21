@@ -10,6 +10,7 @@ import com.ole.core.plugins.DruidPlugin;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Set;
@@ -72,7 +73,7 @@ public class TableImpl implements ITable {
 		StringBuilder questionMark = new StringBuilder("(");
 		for(String string : columnsSet){
 			stringBuilder.append(string + ",");
-			questionMark.append("?,");
+			questionMark.append("'a',");
 		}
 		String columnsExceptDot = stringBuilder.substring(0, stringBuilder.length()-1);
 		columnsExceptDot +=")";
@@ -81,14 +82,17 @@ public class TableImpl implements ITable {
 		String sql = "insert into " + this.name + columnsExceptDot + " values " + questionExceptDot + ";";
 		System.out.println(sql);
 		Connection connection = DruidPlugin.getConnection();
+		PreparedStatement preparedStatement;
+		int result = 0;
 		try {
-			connection.nativeSQL(sql);
+			preparedStatement = connection.prepareStatement(sql);
+			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			DruidPlugin.releaseConnection(connection);
 		}
-		return 0;
+		return result;
 	}
 
 	@Override
