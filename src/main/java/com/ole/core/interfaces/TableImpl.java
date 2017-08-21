@@ -31,8 +31,8 @@ public class TableImpl implements ITable {
 	private void init(){
 		Table table = this.getClass().getAnnotation(Table.class);
 		checkNotNull(table, "this class isn't mapping to a table");
-		idMap = Maps.newHashMap();
-		columnsMap = Maps.newHashMap();
+		idMap = Maps.newTreeMap();
+		columnsMap = Maps.newTreeMap();
 		this.name = table.name();
 		Field[] fields = this.getClass().getDeclaredFields();
 		for(Field field: fields){
@@ -73,7 +73,7 @@ public class TableImpl implements ITable {
 		StringBuilder questionMark = new StringBuilder("(");
 		for(String string : columnsSet){
 			stringBuilder.append(string + ",");
-			questionMark.append("'a',");
+			questionMark.append("?,");
 		}
 		String columnsExceptDot = stringBuilder.substring(0, stringBuilder.length()-1);
 		columnsExceptDot +=")";
@@ -86,6 +86,9 @@ public class TableImpl implements ITable {
 		int result = 0;
 		try {
 			preparedStatement = connection.prepareStatement(sql);
+			for(int i = 0;i<columnsSet.size();i++){
+				preparedStatement.setObject(i+1, "q");
+			}
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

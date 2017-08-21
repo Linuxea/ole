@@ -13,7 +13,7 @@ public class StudentTest {
 		student.setName("linuxea");
 		student.setId(11);
 		System.out.println(student);
-		student.save();
+		System.out.println(student.save());
 	}
 
 }
