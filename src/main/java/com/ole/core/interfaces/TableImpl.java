@@ -1,14 +1,21 @@
 package com.ole.core.interfaces;
 
+import static com.google.common.base.Preconditions.*;
+import com.ole.core.annotation.Column;
+import com.ole.core.annotation.Id;
 import com.ole.core.annotation.Table;
+
+import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Linuxea on 2017/8/21.
  */
 public class TableImpl implements ITable {
 
-	private Object[] ids;
-	private Object[] columns;
+	private Map<String,Class> idMap;
+	private Map<String,Class> columnsMap;
 	private String name; //table name
 
 	/**
@@ -17,7 +24,29 @@ public class TableImpl implements ITable {
 	 */
 	private void init(){
 		Table table = this.getClass().getAnnotation(Table.class);
+		checkNotNull(table, "this class isn't mapping to a table");
 		this.name = table.name();
+		Field[] fields = this.getClass().getFields();
+		for(Field field: fields){
+			field.setAccessible(true);
+			Column column = field.getAnnotation(Column.class);
+			if(null!=column){
+				String columnName = column.name();
+				Class columnType = column.type();
+				columnsMap.put(columnName, columnType);
+				continue; //不会既是column又是id注解
+			}
+			Id id = field.getAnnotation(Id.class);
+			if(null != id){
+				String idName = id.name();
+				Class idType = id.type();
+				idMap.put(idName, idType);
+			}
+		}
+	}
+
+	public Set<String> getIdName(){
+		return idMap.keySet();
 	}
 
 	@Override
@@ -40,42 +69,20 @@ public class TableImpl implements ITable {
 		return null;
 	}
 
-	public TableImpl(Object[] ids, Object[] columns, String name) {
-		this.ids = ids;
-		this.columns = columns;
-		this.name = name;
+	public Map<String, Class> getIdMap() {
+		return idMap;
 	}
 
-	public TableImpl(Object[] ids) {
-		this.ids = ids;
+	public void setIdMap(Map<String, Class> idMap) {
+		this.idMap = idMap;
 	}
 
-	public TableImpl(Object[] columns, String name) {
-		this.columns = columns;
-		this.name = name;
+	public Map<String, Class> getColumnsMap() {
+		return columnsMap;
 	}
 
-	public TableImpl(String name) {
-		this.name = name;
-	}
-
-	public TableImpl() {
-	}
-
-	public Object[] getIds() {
-		return ids;
-	}
-
-	public void setIds(Object[] ids) {
-		this.ids = ids;
-	}
-
-	public Object[] getColumns() {
-		return columns;
-	}
-
-	public void setColumns(Object[] columns) {
-		this.columns = columns;
+	public void setColumnsMap(Map<String, Class> columnsMap) {
+		this.columnsMap = columnsMap;
 	}
 
 	public String getName() {
