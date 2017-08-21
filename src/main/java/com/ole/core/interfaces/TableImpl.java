@@ -65,10 +65,18 @@ public class TableImpl implements ITable {
 	public int save() {
 		System.out.println("save");
 		Set<String> columnsSet = getColumnsName();
+		StringBuilder stringBuilder = new StringBuilder("(");
+		StringBuilder questionMark = new StringBuilder("(");
 		for(String string : columnsSet){
-
+			stringBuilder.append(string + ",");
+			questionMark.append("?,");
 		}
-		String sql = "insert into " + this.name + "";
+		String columnsExceptDot = stringBuilder.substring(0, stringBuilder.length()-1);
+		columnsExceptDot +=")";
+		String questionExceptDot = questionMark.substring(0, questionMark.length()-1);
+		questionExceptDot += ")";
+		String sql = "insert into " + this.name + columnsExceptDot + " values " + questionExceptDot + ";";
+		System.out.println(sql);
 		return 0;
 	}
 
