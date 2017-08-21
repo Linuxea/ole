@@ -64,6 +64,11 @@ public class TableImpl implements ITable {
 	@Override
 	public int save() {
 		System.out.println("save");
+		Set<String> columnsSet = getColumnsName();
+		for(String string : columnsSet){
+
+		}
+		String sql = "insert into " + this.name + "";
 		return 0;
 	}
 
