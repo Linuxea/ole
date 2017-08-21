@@ -13,7 +13,7 @@ public class PropertiesTest {
 	@Test
 	public void test1(){
 		Properties properties = new Properties();
-		InputStream fileInputStream = null;
+		InputStream fileInputStream;
 		try {
 			fileInputStream =
 				this.getClass().getClassLoader().getResourceAsStream("db.properties");
