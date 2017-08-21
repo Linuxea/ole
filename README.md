@@ -47,13 +47,13 @@ Demo:
      */
     public class StudentTest {
 
-	    @Test
-	    public void test1(){
-		    Student student = new Student();
-		    student.setName("linuxea");
-		    student.setId(11);
-		    System.out.println(student);
-		    System.out.println(student.save());
+	@Test
+	public void test1(){
+		Student student = new Student();
+		student.setName("linuxea");
+		student.setId(11);
+		System.out.println(student);
+		System.out.println(student.save());
 	    }
       }
 
