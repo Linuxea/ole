@@ -16,8 +16,6 @@ public class Student extends TableImpl {
 	private int id;
 	@Column(name="name",type = String.class)
 	private String name;
-	@Column(name="age",type = Integer.class)
-	private Integer age;
 	@Column(name = "sex", type = Byte.class)
 	private byte sex;
 
@@ -37,13 +35,6 @@ public class Student extends TableImpl {
 		this.name = name;
 	}
 
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
 
 	public byte getSex() {
 		return sex;
@@ -58,7 +49,7 @@ public class Student extends TableImpl {
 		return "Student{" +
 				"id=" + id +
 				", name='" + name + '\'' +
-				", age=" + age +
+				", sex=" + sex +
 				'}';
 	}
 }

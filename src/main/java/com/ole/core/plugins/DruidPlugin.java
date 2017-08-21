@@ -2,8 +2,12 @@ package com.ole.core.plugins;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by Linuxea on 2017/8/21.
@@ -25,7 +29,27 @@ public class DruidPlugin {
 	}
 
 	static {
+		scanProperties();
 		init();
+	}
+
+	public static void scanProperties(){
+		Properties properties = new Properties();
+		InputStream fileInputStream = null;
+		try {
+			fileInputStream =
+					DruidPlugin.class.getClassLoader().getResourceAsStream("db.properties");
+			properties.load(fileInputStream);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		url = properties.getProperty("dburl");
+		userName = properties.getProperty("userName");
+		password = properties.getProperty("password");
+
 	}
 
 	/**

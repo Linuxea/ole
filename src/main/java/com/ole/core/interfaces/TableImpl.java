@@ -6,8 +6,11 @@ import com.google.common.collect.Maps;
 import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
 import com.ole.core.annotation.Table;
+import com.ole.core.plugins.DruidPlugin;
 
 import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.Set;
 
@@ -77,6 +80,14 @@ public class TableImpl implements ITable {
 		questionExceptDot += ")";
 		String sql = "insert into " + this.name + columnsExceptDot + " values " + questionExceptDot + ";";
 		System.out.println(sql);
+		Connection connection = DruidPlugin.getConnection();
+		try {
+			connection.nativeSQL(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DruidPlugin.releaseConnection(connection);
+		}
 		return 0;
 	}
 
