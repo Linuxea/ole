@@ -10,5 +10,4 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.METHOD})
 public @interface Id {
 	String name() default "id";
-	Class type() default Integer.class;
 }

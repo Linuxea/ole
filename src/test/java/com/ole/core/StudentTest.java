@@ -14,7 +14,7 @@ public class StudentTest {
 		student.setId(11);
 		System.out.println(student);
 		int result = 0;
-//		result = student.save(); // ci上面没有数据库环境会报错 注释掉
+		result = student.save(); // ci上面没有数据库环境会报错 注释掉
 		System.out.println(result);
 	}
 

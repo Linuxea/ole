@@ -40,14 +40,14 @@ public class TableImpl implements ITable {
 			Column column = field.getAnnotation(Column.class);
 			if(null!=column){
 				String columnName = column.name();
-				Class columnType = column.type();
+				Class columnType = column.getClass();
 				columnsMap.put(columnName, columnType);
 				continue; //不会既是column又是id注解
 			}
 			Id id = field.getAnnotation(Id.class);
 			if(null != id){
 				String idName = id.name();
-				Class idType = id.type();
+				Class idType = id.getClass();
 				idMap.put(idName, idType);
 			}
 		}

@@ -10,5 +10,4 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.METHOD})
 public @interface Column {
 	String name();
-	Class type();
 }

@@ -14,9 +14,9 @@ public class Student extends TableImpl {
 
 	@Id
 	private int id;
-	@Column(name="name",type = String.class)
+	@Column(name="name")
 	private String name;
-	@Column(name = "sex", type = Byte.class)
+	@Column(name = "sex")
 	private byte sex;
 
 	public int getId() {
