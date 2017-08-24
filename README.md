@@ -16,7 +16,7 @@ Demo:
     import com.ole.core.annotation.Column;
     import com.ole.core.annotation.Id;
     import com.ole.core.annotation.Table;
-    import com.ole.core.interfaces.TableImpl;
+    import com.ole.core.interfaces.Table;
     
     /**
     * Created by Linuxea on 2017/8/21.

@@ -2,17 +2,14 @@ package com.ole.core;
 
 import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
-import com.ole.core.annotation.Table;
-import com.ole.core.interfaces.TableImpl;
-
-import java.io.Serializable;
+import com.ole.core.interfaces.Table;
 
 
 /**
  * Created by Linuxea on 2017/8/21.
  */
-@Table(name="stu")
-public class Student extends TableImpl{
+@com.ole.core.annotation.Table(name="stu")
+public class Student extends Table {
 
 	@Id
 	private int id;
