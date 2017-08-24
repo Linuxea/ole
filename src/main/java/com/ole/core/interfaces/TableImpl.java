@@ -9,6 +9,7 @@ import com.ole.core.annotation.Table;
 import com.ole.core.plugins.DruidPlugin;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,7 +23,7 @@ import java.util.Set;
 /**
  * Created by Linuxea on 2017/8/21.
  */
-public class TableImpl implements ITable {
+public class TableImpl implements ITable{
 
 	private Map<String,Class> idMap;
 	private Map<String,Class> columnsMap;
@@ -97,7 +98,7 @@ public class TableImpl implements ITable {
 			while (iterable.hasNext()){
 			    String column = iterable.next();
                 Method method = clazz.getMethod("get" + StringUtils.capitalize(column));
-                Object returnVal = method.invoke(table);
+                Object returnVal = method.invoke(this);
                 preparedStatement.setObject(++i, returnVal);
             }
 			result = preparedStatement.executeUpdate();
