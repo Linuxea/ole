@@ -27,8 +27,9 @@ public class TableImpl implements ITable{
 	private Map<String,Class> idMap;
 	private Map<String,Class> columnsMap;
 	private String name; //table name
+    private Column column;
 
-	/**
+    /**
 	 * init
 	 * 解析此table class
 	 */
@@ -38,12 +39,18 @@ public class TableImpl implements ITable{
 		idMap = Maps.newTreeMap();
 		columnsMap = Maps.newTreeMap();
 		this.name = table.name();
+		if(StringUtils.isEmpty(name)){ //Table注解没有name值的时候默认为当前类的名称
+		    this.name = this.getClass().getSimpleName().toLowerCase();
+        }
 		Field[] fields = this.getClass().getDeclaredFields();
 		for(Field field: fields){
 			field.setAccessible(true);
-			Column column = field.getAnnotation(Column.class);
-			if(null!=column){
+            column = field.getAnnotation(Column.class);
+			if(null!= column){
 				String columnName = column.name();
+				if(StringUtils.isEmpty(columnName)){
+                    columnName = field.getName();
+                }
 				Class columnType = column.getClass();
 				columnsMap.put(columnName, columnType);
 				continue; //不会既是column又是id注解
@@ -51,6 +58,9 @@ public class TableImpl implements ITable{
 			Id id = field.getAnnotation(Id.class);
 			if(null != id){
 				String idName = id.name();
+                if(StringUtils.isEmpty(idName)){
+                    idName = field.getName();
+                }
 				Class idType = id.getClass();
 				idMap.put(idName, idType);
 			}
@@ -69,7 +79,7 @@ public class TableImpl implements ITable{
 	public Set<String> getIdWithOtherColumnsName(){
 	    Set<String> setString = Sets.newHashSet();
         setString.addAll(getIdsColumnsName());
-        setString.addAll(getIdsColumnsName());
+        setString.addAll(getColumnsName());
         return setString;
     }
 

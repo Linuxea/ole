@@ -8,16 +8,16 @@ import com.ole.core.interfaces.TableImpl;
 /**
  * create by linuxea on 2017/8/24 18:19
  **/
-@Table(name="person")
+@Table
 public class Person extends TableImpl{
 
     @Id
     private int id;
-    @Column(name="name")
+    @Column
     private String name;
-    @Column(name = "sex")
+    @Column
     private String sex;
-    @Column(name="score")
+    @Column
     private Double score;
 
     public int getId() {

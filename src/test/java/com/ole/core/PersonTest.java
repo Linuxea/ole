@@ -11,10 +11,10 @@ public class PersonTest {
     @Test
     public void save(){
         Person person = new Person();
-//        person.setId(22);
-        person.setName("jacd");
-        person.setScore(99D);
-        person.setSex("bb");
+        person.setId(124);
+        person.setName("linuxea");
+        person.setScore(100D);
+        person.setSex("01");
         person.save();
     }
 
