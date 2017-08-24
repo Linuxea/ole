@@ -2,14 +2,13 @@ package com.ole.core;
 
 import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
-import com.ole.core.annotation.Table;
-import com.ole.core.interfaces.TableImpl;
+import com.ole.core.interfaces.Table;
 
 /**
  * create by linuxea on 2017/8/24 18:19
  **/
-@Table
-public class Person extends TableImpl{
+@com.ole.core.annotation.Table
+public class Person extends Table {
 
     @Id
     private int id;
@@ -28,12 +27,10 @@ public class Person extends TableImpl{
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
