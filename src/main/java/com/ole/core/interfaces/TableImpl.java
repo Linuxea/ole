@@ -7,11 +7,15 @@ import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
 import com.ole.core.annotation.Table;
 import com.ole.core.plugins.DruidPlugin;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -66,8 +70,8 @@ public class TableImpl implements ITable {
 	}
 
 	@Override
-	public int save() {
-		System.out.println("save");
+	public int save(){
+        System.out.println("save");
 		Set<String> columnsSet = getColumnsName();
 		StringBuilder stringBuilder = new StringBuilder("(");
 		StringBuilder questionMark = new StringBuilder("(");
@@ -86,13 +90,22 @@ public class TableImpl implements ITable {
 		int result = 0;
 		try {
 			preparedStatement = connection.prepareStatement(sql);
-			for(int i = 0;i<columnsSet.size();i++){
-				preparedStatement.setObject(i+1, "q");
-			}
+			Iterator<String> iterable = columnsSet.iterator();
+			int i = 0;
+			Class<? extends TableImpl> clazz = this.getClass();
+            TableImpl table = clazz.newInstance();
+			while (iterable.hasNext()){
+			    String column = iterable.next();
+                Method method = clazz.getMethod("get" + StringUtils.capitalize(column));
+                Object returnVal = method.invoke(table);
+                preparedStatement.setObject(++i, returnVal);
+            }
 			result = preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
+		} catch ( ReflectiveOperationException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
 			DruidPlugin.releaseConnection(connection);
 		}
 		return result;

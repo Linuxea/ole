@@ -11,6 +11,7 @@ public class StudentTest {
 	public void test1(){
 		Student student = new Student();
 		student.setName("linuxea");
+		student.setSex((byte) 1);
 		student.setId(11);
 		System.out.println(student);
 		int result = 0;
