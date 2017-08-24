@@ -12,7 +12,7 @@ import java.io.Serializable;
  * Created by Linuxea on 2017/8/21.
  */
 @Table(name="stu")
-public class Student extends TableImpl implements Serializable {
+public class Student extends TableImpl{
 
 	@Id
 	private int id;

@@ -72,7 +72,6 @@ public class TableImpl implements ITable{
 
 	@Override
 	public int save(){
-        System.out.println("save");
 		Set<String> columnsSet = getColumnsName();
 		StringBuilder stringBuilder = new StringBuilder("(");
 		StringBuilder questionMark = new StringBuilder("(");
@@ -85,7 +84,7 @@ public class TableImpl implements ITable{
 		String questionExceptDot = questionMark.substring(0, questionMark.length()-1);
 		questionExceptDot += ")";
 		String sql = "insert into " + this.name + columnsExceptDot + " values " + questionExceptDot + ";";
-		System.out.println(sql);
+		System.out.println("sql:" + sql);
 		Connection connection = DruidPlugin.getConnection();
 		PreparedStatement preparedStatement;
 		int result = 0;
