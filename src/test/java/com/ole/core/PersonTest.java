@@ -1,5 +1,6 @@
 package com.ole.core;
 
+import com.ole.core.utils.Db;
 import org.junit.Test;
 
 /**
@@ -17,4 +18,27 @@ public class PersonTest {
         person.save();
     }
 
+
+    @Test
+    public void save2(){
+        Person person = new Person();
+        person.setId(93);
+        person.setSex("02");
+        person.setName("林ot");
+        person.setScore(96.3D);
+        person.save();
+    }
+
+    @Test
+    public void save3() {
+        Db.atom(() -> {
+            Person person = new Person();
+            person.setSex("89");
+            person.setName("林ot");
+            person.setScore(96.3D);
+            person.save();
+            int i = 1 / 0;
+            System.out.println(i);
+        });
+    }
 }

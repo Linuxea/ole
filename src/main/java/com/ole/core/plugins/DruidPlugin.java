@@ -1,6 +1,7 @@
 package com.ole.core.plugins;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.ole.core.interfaces.IAtom;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class DruidPlugin {
 		return null;
 	}
 
-	/**
+    /**
 	 * 关闭数据库连接池
 	 * @param connection
 	 * @throws SQLException
@@ -111,4 +112,5 @@ public class DruidPlugin {
 		this.userName = userName;
 		this.password = password;
 	}
+
 }
