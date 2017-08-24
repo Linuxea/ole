@@ -3,15 +3,14 @@ package com.ole.core.interfaces;
 import static com.google.common.base.Preconditions.*;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
 import com.ole.core.annotation.Table;
 import com.ole.core.plugins.DruidPlugin;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,13 +57,21 @@ public class TableImpl implements ITable{
 		}
 	}
 
-	public Set<String> getIdName(){
-		return idMap.keySet();
-	}
 
 	public Set<String> getColumnsName(){
 		return columnsMap.keySet();
 	}
+
+	public Set<String> getIdsColumnsName(){
+	    return idMap.keySet();
+    }
+
+	public Set<String> getIdWithOtherColumnsName(){
+	    Set<String> setString = Sets.newHashSet();
+        setString.addAll(getIdsColumnsName());
+        setString.addAll(getIdsColumnsName());
+        return setString;
+    }
 
 	public TableImpl() {
 		this.init();
@@ -72,10 +79,10 @@ public class TableImpl implements ITable{
 
 	@Override
 	public int save(){
-		Set<String> columnsSet = getColumnsName();
+		Set<String> allColumnsSet = getIdWithOtherColumnsName();
 		StringBuilder stringBuilder = new StringBuilder("(");
 		StringBuilder questionMark = new StringBuilder("(");
-		for(String string : columnsSet){
+		for(String string : allColumnsSet){
 			stringBuilder.append(string + ",");
 			questionMark.append("?,");
 		}
@@ -90,7 +97,7 @@ public class TableImpl implements ITable{
 		int result = 0;
 		try {
 			preparedStatement = connection.prepareStatement(sql);
-			Iterator<String> iterable = columnsSet.iterator();
+			Iterator<String> iterable = allColumnsSet.iterator();
 			int i = 0;
 			Class<? extends TableImpl> clazz = this.getClass();
 			while (iterable.hasNext()){
