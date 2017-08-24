@@ -2,13 +2,14 @@ package com.ole.core;
 
 import com.ole.core.annotation.Column;
 import com.ole.core.annotation.Id;
-import com.ole.core.interfaces.Table;
+import com.ole.core.annotation.Table;
+import com.ole.core.interfaces.TableImpl;
 
 /**
  * create by linuxea on 2017/8/24 18:19
  **/
-@com.ole.core.annotation.Table
-public class Person extends Table {
+@Table
+public class Person extends TableImpl {
 
     @Id
     private int id;

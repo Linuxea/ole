@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * Created by Linuxea on 2017/8/21.
  */
-public class TableTest {
+public class TableImplTest {
 
 	@Test
 	public void test1(){

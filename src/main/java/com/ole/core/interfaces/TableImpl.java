@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * Created by Linuxea on 2017/8/21.
  */
-public class Table implements ITable{
+public class TableImpl implements ITable{
 
 	private Map<String,Class> idMap;
 	private Map<String,Class> columnsMap;
@@ -82,7 +82,7 @@ public class Table implements ITable{
         return setString;
     }
 
-	public Table() {
+	public TableImpl() {
 		this.init();
 	}
 
@@ -108,7 +108,7 @@ public class Table implements ITable{
 			preparedStatement = connection.prepareStatement(sql);
 			Iterator<String> iterable = allColumnsSet.iterator();
 			int i = 0;
-			Class<? extends Table> clazz = this.getClass();
+			Class<? extends TableImpl> clazz = this.getClass();
 			while (iterable.hasNext()){
 			    String column = iterable.next();
                 Method method = clazz.getMethod("get" + StringUtils.capitalize(column));

@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 /**
  * Created by Linuxea on 2017/8/21.
- * one Table one table
+ * one TableImpl one table
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
