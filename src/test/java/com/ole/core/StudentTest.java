@@ -7,16 +7,25 @@ import org.junit.Test;
  */
 public class StudentTest {
 
-	@Test
-	public void test1(){
-		Student student = new Student();
-		student.setName("linuxea");
-		student.setSex((byte) 1);
-		student.setId(11);
-		System.out.println(student);
-		int result = 0;
-		result = student.save(); // ci上面没有数据库环境会报错 注释掉
-		System.out.println(result);
-	}
+    @Test
+    public void test1() {
+        Student student = new Student();
+        student.setName("linuxea");
+        student.setSex((byte) 1);
+        student.setId(11);
+        System.out.println(student);
+        int result = 0;
+        result = student.save(); // ci上面没有数据库环境会报错 注释掉
+        System.out.println(result);
+    }
+
+
+    @Test
+    public void test2(){
+        Student student = new Student();
+        student.setSex((byte)19);
+        student.setName("otam");
+        student.save();
+    }
 
 }

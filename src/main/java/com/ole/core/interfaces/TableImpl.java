@@ -94,7 +94,6 @@ public class TableImpl implements ITable{
 			Iterator<String> iterable = columnsSet.iterator();
 			int i = 0;
 			Class<? extends TableImpl> clazz = this.getClass();
-            TableImpl table = clazz.newInstance();
 			while (iterable.hasNext()){
 			    String column = iterable.next();
                 Method method = clazz.getMethod("get" + StringUtils.capitalize(column));
