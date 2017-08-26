@@ -33,6 +33,7 @@ public class Db {
 	 * 事务原子方法
 	 * @param iAtom
 	 */
+	@Deprecated
 	public static void atom(IAtom iAtom){
 		Connection connection = DruidPlugin.getConnection();
 		try{
