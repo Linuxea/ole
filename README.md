@@ -12,49 +12,49 @@
 Demo:
 
     package com.ole.core;
-    
-    import com.ole.core.annotation.Column;
-    import com.ole.core.annotation.Id;
-    import com.ole.core.annotation.Table;
-    import com.ole.core.interfaces.TableImpl;
-    
-    /**
-    * Created by Linuxea on 2017/8/21.
-    * 
-    * */
-    
-    @Table(name="stu")
-    public class Student extends TableImpl {
 
-	    @Id
-	    private int id;
-	    @Column(name="name",type = String.class)
-	    private String name;
-	    @Column(name = "sex", type = Byte.class)
-	    private byte sex;
-
-	    //setter/getter/tostring 省略
-      }
-
-
-
-    package com.ole.core;
-
+    import com.ole.core.utils.Db;
     import org.junit.Test;
 
     /**
-     * Created by Linuxea on 2017/8/21.
-     */
-    public class StudentTest {
+     * create by linuxea on 2017/8/24 18:22
+     **/
+    public class PersonTest {
 
-	@Test
-	public void test1(){
-		Student student = new Student();
-		student.setName("linuxea");
-		student.setId(11);
-		System.out.println(student);
-		System.out.println(student.save());
-	    }
-      }
+
+        @Test
+        public void save(){
+            Person person = new Person();
+            person.setName("linuxea");
+            person.setScore(100D);
+            person.setSex("01");
+            person.save();
+        }
+
+
+        @Test
+        public void save2(){
+            Person person = new Person();
+            person.setId(93);
+            person.setSex("02");
+            person.setName("林ot");
+            person.setScore(96.3D);
+            person.save();
+        }
+
+        @Test
+        public void save3() {
+            Db.atom(() -> {
+                Person person = new Person();
+                person.setSex("89");
+                person.setName("林ot");
+                person.setScore(96.3D);
+                person.save();
+                int i = 1 / 0;
+                System.out.println(i);
+            });
+        }
+    }
+
 
 
