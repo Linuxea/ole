@@ -15,7 +15,7 @@ public class PersonTest {
         person.setName("linuxea");
         person.setScore(100D);
         person.setSex("01");
-        person.save();
+//        person.save();
     }
 
 
@@ -26,7 +26,7 @@ public class PersonTest {
         person.setSex("02");
         person.setName("林ot");
         person.setScore(96.3D);
-        person.save();
+//        person.save();
     }
 
     @Test
@@ -36,9 +36,9 @@ public class PersonTest {
             person.setSex("89");
             person.setName("林ot");
             person.setScore(96.3D);
-            person.save();
-            int i = 1 / 0;
-            System.out.println(i);
+//            person.save();
+//            int i = 1 / 0;
+//            System.out.println(i);
         });
     }
 }
