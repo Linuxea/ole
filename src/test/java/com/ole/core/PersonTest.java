@@ -11,34 +11,34 @@ public class PersonTest {
 
     @Test
     public void save(){
-        Person person = new Person();
-        person.setName("linuxea");
-        person.setScore(100D);
-        person.setSex("01");
+//        Person person = new Person();
+//        person.setName("linuxea");
+//        person.setScore(100D);
+//        person.setSex("01");
 //        person.save();
     }
 
 
     @Test
     public void save2(){
-        Person person = new Person();
-        person.setId(93);
-        person.setSex("02");
-        person.setName("林ot");
-        person.setScore(96.3D);
+//        Person person = new Person();
+//        person.setId(93);
+//        person.setSex("02");
+//        person.setName("林ot");
+//        person.setScore(96.3D);
 //        person.save();
     }
 
     @Test
     public void save3() {
-        Db.atom(() -> {
-            Person person = new Person();
-            person.setSex("89");
-            person.setName("林ot");
-            person.setScore(96.3D);
-//            person.save();
-//            int i = 1 / 0;
-//            System.out.println(i);
-        });
+//        Db.atom(() -> {
+//            Person person = new Person();
+//            person.setSex("89");
+//            person.setName("林ot");
+//            person.setScore(96.3D);
+////            person.save();
+////            int i = 1 / 0;
+////            System.out.println(i);
+//        });
     }
 }
