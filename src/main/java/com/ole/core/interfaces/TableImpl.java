@@ -134,15 +134,24 @@ public class TableImpl implements ITable{
 
 	@Override
 	public int delete() {
-		System.out.println("delete");
 		StringBuilder stringBuilder = new StringBuilder(35);
 		stringBuilder.append(" delete from " + this.getTableName() );
 		stringBuilder.append(" where  1=1 ");
 		Iterator<String> iterator = idMap.keySet().iterator();
+        Class<? extends TableImpl> clazz = this.getClass();
 		for(;iterator.hasNext();) {
             String idName = iterator.next();
-		    stringBuilder.append(" and " + idName + " = " +  idMap.get(idName) + " ");
+            Method method ;
+            Object returnVal = null;
+           try{
+               method = clazz.getMethod("get" + StringUtils.capitalize(idName));
+               returnVal = method.invoke(this);
+           }catch (ReflectiveOperationException e){
+               e.printStackTrace();
+           }
+		    stringBuilder.append(" and " + idName + " = " + returnVal + " ");
         }
+        System.out.println(stringBuilder.toString());
         Connection connection = DruidPlugin.getConnection();
         PreparedStatement preparedStatement;
         int result = 0;
