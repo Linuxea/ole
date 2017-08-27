@@ -1,7 +1,7 @@
 # ole  ![Build Status](https://travis-ci.org/Linuxea/ole.svg?branch=master)
 **a simple ORM framework**
 
-花了今天下午三个半小时搭建起来的一个简易的ORM映射框架，目前只支持save保存,同时字段值还是目前暂时写死的...
+花了今天下午三个半小时搭建起来的一个简易的ORM映射框架
 
 <br/>
 
