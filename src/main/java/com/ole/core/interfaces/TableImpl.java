@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Map;
@@ -133,25 +134,11 @@ public class TableImpl implements ITable{
 	}
 
 	@Override
-	public int delete() {
+	public int deleteById() {
 		StringBuilder stringBuilder = new StringBuilder(35);
 		stringBuilder.append(" delete from " + this.getTableName() );
 		stringBuilder.append(" where  1=1 ");
-		Iterator<String> iterator = idMap.keySet().iterator();
-        Class<? extends TableImpl> clazz = this.getClass();
-		for(;iterator.hasNext();) {
-            String idName = iterator.next();
-            Method method ;
-            Object returnVal = null;
-           try{
-               method = clazz.getMethod("get" + StringUtils.capitalize(idName));
-               returnVal = method.invoke(this);
-           }catch (ReflectiveOperationException e){
-               e.printStackTrace();
-           }
-		    stringBuilder.append(" and " + idName + " = " + returnVal + " ");
-        }
-        System.out.println(stringBuilder.toString());
+        stringBuilder.append(common());
         Connection connection = DruidPlugin.getConnection();
         PreparedStatement preparedStatement;
         int result = 0;
@@ -164,11 +151,54 @@ public class TableImpl implements ITable{
         return result;
 	}
 
+	private String  common(){
+	    StringBuilder stringBuilder = new StringBuilder(100);
+        Iterator<String> iterator = idMap.keySet().iterator();
+        Class<? extends TableImpl> clazz = this.getClass();
+        for(;iterator.hasNext();) {
+            String idName = iterator.next();
+            Method method ;
+            Object returnVal = null;
+            try{
+                method = clazz.getMethod("get" + StringUtils.capitalize(idName));
+                returnVal = method.invoke(this);
+            }catch (ReflectiveOperationException e){
+                e.printStackTrace();
+            }
+            stringBuilder.append(" and " + idName + " = " + returnVal + " ").toString();
+        }
+        return stringBuilder.toString();
+    }
+
 	@Override
 	public ITable findById() {
-		System.out.println("findById");
-		return null;
+        StringBuilder stringBuilder = new StringBuilder(35);
+        stringBuilder.append(" select * from " + this.getTableName() );
+        stringBuilder.append(" where  1=1 ");
+        stringBuilder.append(common());
+        System.out.println(stringBuilder.toString());
+        Connection connection = DruidPlugin.getConnection();
+        PreparedStatement preparedStatement;
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(stringBuilder.toString());
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                resultSet.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
 	}
+
 
 	public Map<String, Class> getIdMap() {
 		return idMap;

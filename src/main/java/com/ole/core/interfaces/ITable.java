@@ -9,8 +9,9 @@ public interface ITable {
 
 	int update();
 
-	int delete();
+	int deleteById();
 
 	ITable findById();
+
 
 }
