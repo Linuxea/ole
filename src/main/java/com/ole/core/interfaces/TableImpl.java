@@ -135,7 +135,24 @@ public class TableImpl implements ITable{
 	@Override
 	public int delete() {
 		System.out.println("delete");
-		return 0;
+		StringBuilder stringBuilder = new StringBuilder(35);
+		stringBuilder.append(" delete from " + this.getTableName() );
+		stringBuilder.append(" where  1=1 ");
+		Iterator<String> iterator = idMap.keySet().iterator();
+		for(;iterator.hasNext();) {
+            String idName = iterator.next();
+		    stringBuilder.append(" and " + idName + " = " +  idMap.get(idName) + " ");
+        }
+        Connection connection = DruidPlugin.getConnection();
+        PreparedStatement preparedStatement;
+        int result = 0;
+        try {
+            preparedStatement = connection.prepareStatement(stringBuilder.toString());
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
 	}
 
 	@Override
