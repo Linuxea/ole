@@ -2,7 +2,6 @@ package com.ole.core.plugins;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -20,17 +19,23 @@ public class DruidPlugin {
 
     private static DruidDataSource dataSource;
 
+    static {
+        scanProperties();
+        init();
+    }
+
+    public DruidPlugin(String url, String userName, String password) {
+        this.url = url;
+        this.userName = userName;
+        this.password = password;
+    }
+
     private static void init() {
         dataSource = new DruidDataSource();
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
         dataSource.setPassword(password);
         //TODO 更多配置敬请期待
-    }
-
-    static {
-        scanProperties();
-        init();
     }
 
     public static void scanProperties() {
@@ -79,7 +84,6 @@ public class DruidPlugin {
         }
     }
 
-
     public String getUrl() {
         return url;
     }
@@ -101,12 +105,6 @@ public class DruidPlugin {
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public DruidPlugin(String url, String userName, String password) {
-        this.url = url;
-        this.userName = userName;
         this.password = password;
     }
 

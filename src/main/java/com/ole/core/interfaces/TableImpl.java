@@ -1,7 +1,5 @@
 package com.ole.core.interfaces;
 
-import static com.google.common.base.Preconditions.*;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.ole.core.annotation.Column;
@@ -19,6 +17,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Created by Linuxea on 2017/8/21.
  */
@@ -28,6 +28,10 @@ public class TableImpl implements ITable {
     private Map<String, Class> columnsMap;
     private String tableName; //table name
     private Column column;
+
+    public TableImpl() {
+        this.init();
+    }
 
     /**
      * init
@@ -67,7 +71,6 @@ public class TableImpl implements ITable {
         }
     }
 
-
     public Set<String> getColumnsName() {
         return columnsMap.keySet();
     }
@@ -81,10 +84,6 @@ public class TableImpl implements ITable {
         setString.addAll(getIdsColumnsName());
         setString.addAll(getColumnsName());
         return setString;
-    }
-
-    public TableImpl() {
-        this.init();
     }
 
     @Override

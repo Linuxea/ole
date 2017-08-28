@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="false" scanPeriod="60 seconds" debug="true">
-    <property name="LOG_HOME" value="C:/Users/linuxea.lin/Desktop/log/" />
+    <property name="LOG_HOME" value="C:/Users/linuxea.lin/Desktop/log/"/>
     <property name="appName" value="ole"></property>
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <Encoding>UTF-8</Encoding>
@@ -23,10 +23,10 @@
         </layout>
     </appender>
 
-    <logger name="com.ole" level="debug" />
+    <logger name="com.ole" level="debug"/>
 
     <root level="debug">
-        <appender-ref ref="stdout" />
-        <appender-ref ref="appLogAppender" />
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="appLogAppender"/>
     </root>
 </configuration>
