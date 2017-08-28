@@ -13,48 +13,50 @@ import java.sql.SQLException;
  */
 public class Db {
 
-	public static int save(ITable iTable){
-		return iTable.save();
-	}
+    public static int save(ITable iTable) {
+        return iTable.save();
+    }
 
-	public static int update(ITable iTable){
-		return iTable.update();
-	}
+    public static int update(ITable iTable) {
+        return iTable.update();
+    }
 
-	public static int delete(ITable iTable){
-		return iTable.delete();
-	}
+    public static int delete(ITable iTable) {
+        return iTable.deleteById();
+    }
 
-	public static ITable findById(ITable iTable){
-		return iTable.findById();
-	}
+    public static ITable findById(ITable iTable) {
+        return iTable.findById();
+    }
 
-	/**
-	 * 事务原子方法
-	 * @param iAtom
-	 */
-	@Deprecated
-	public static void atom(IAtom iAtom){
-		Connection connection = DruidPlugin.getConnection();
-		try{
-			connection.setAutoCommit(false);
-			iAtom.run();
+    /**
+     * 事务原子方法
+     *
+     * @param iAtom
+     */
+    @SuppressWarnings("JavaDoc")
+    @Deprecated
+    public static void atom(IAtom iAtom) {
+        Connection connection = DruidPlugin.getConnection();
+        try {
+            connection.setAutoCommit(false);
+            iAtom.run();
             connection.commit();
-		}catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-		    try {
+            try {
                 connection.rollback();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-		}finally {
+        } finally {
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             DruidPlugin.releaseConnection(connection);
-		}
-	}
+        }
+    }
 
 }

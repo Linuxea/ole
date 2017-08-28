@@ -8,47 +8,47 @@ import com.ole.core.interfaces.TableImpl;
 /**
  * Created by Linuxea on 2017/8/21.
  */
-@com.ole.core.annotation.Table(name="stu")
+@com.ole.core.annotation.Table(name = "stu")
 public class Student extends TableImpl {
 
-	@Id
-	private int id;
-	@Column(name="name")
-	private String name;
-	@Column(name = "sex")
-	private byte sex;
+    @Id
+    private int id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "sex")
+    private byte sex;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 
-	public byte getSex() {
-		return sex;
-	}
+    public byte getSex() {
+        return sex;
+    }
 
-	public void setSex(byte sex) {
-		this.sex = sex;
-	}
+    public void setSex(byte sex) {
+        this.sex = sex;
+    }
 
-	@Override
-	public String toString() {
-		return "Student{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", sex=" + sex +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                '}';
+    }
 }

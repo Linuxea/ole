@@ -7,9 +7,9 @@ import org.junit.Test;
  */
 public class TableImplTest {
 
-	@Test
-	public void test1(){
-		System.out.println("hello!ole");
-	}
+    @Test
+    public void test1() {
+        System.out.println("hello!ole");
+    }
 
 }

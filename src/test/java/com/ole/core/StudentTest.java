@@ -20,7 +20,7 @@ public class StudentTest {
 
 
     @Test
-    public void test2(){
+    public void test2() {
 //        Student student = new Student();
 //        student.setSex((byte)19);
 //        student.setName("otam");

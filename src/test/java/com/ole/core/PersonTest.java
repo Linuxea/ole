@@ -1,6 +1,5 @@
 package com.ole.core;
 
-import com.ole.core.utils.Db;
 import org.junit.Test;
 
 /**
@@ -10,7 +9,7 @@ public class PersonTest {
 
 
     @Test
-    public void save(){
+    public void save() {
 //        Person person = new Person();
 //        person.setName("linuxea");
 //        person.setScore(100D);
@@ -20,7 +19,7 @@ public class PersonTest {
 
 
     @Test
-    public void save2(){
+    public void save2() {
 //        Person person = new Person();
 //        person.setId(93);
 //        person.setSex("02");

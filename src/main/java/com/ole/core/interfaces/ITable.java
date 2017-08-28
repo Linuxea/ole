@@ -5,13 +5,13 @@ package com.ole.core.interfaces;
  */
 public interface ITable {
 
-	int save();
+    int save();
 
-	int update();
+    int update();
 
-	int deleteById();
+    int deleteById();
 
-	ITable findById();
+    ITable findById();
 
 
 }

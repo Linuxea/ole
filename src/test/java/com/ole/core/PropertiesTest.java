@@ -10,25 +10,23 @@ import java.util.Properties;
  */
 public class PropertiesTest {
 
-	@Test
-	public void test1(){
-		Properties properties = new Properties();
-		InputStream fileInputStream;
-		try {
-			fileInputStream =
-				this.getClass().getClassLoader().getResourceAsStream("db.properties");
-			properties.load(fileInputStream);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		String url = properties.getProperty("dburl");
-		System.out.println(url);
-		String userName = properties.getProperty("userName");
-		System.out.println(userName);
-		String password = properties.getProperty("password");
-		System.out.println(password);
-	}
+    @Test
+    public void test1() {
+        Properties properties = new Properties();
+        InputStream fileInputStream;
+        try {
+            fileInputStream =
+                    this.getClass().getClassLoader().getResourceAsStream("db.properties");
+            properties.load(fileInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String url = properties.getProperty("dburl");
+        System.out.println(url);
+        String userName = properties.getProperty("userName");
+        System.out.println(userName);
+        String password = properties.getProperty("password");
+        System.out.println(password);
+    }
 
 }
